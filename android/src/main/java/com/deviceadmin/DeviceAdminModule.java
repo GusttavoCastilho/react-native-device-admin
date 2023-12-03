@@ -1,7 +1,6 @@
 package com.deviceadmin;
 
 import androidx.annotation.NonNull;
-
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -10,6 +9,7 @@ import com.facebook.react.module.annotations.ReactModule;
 
 @ReactModule(name = DeviceAdminModule.NAME)
 public class DeviceAdminModule extends ReactContextBaseJavaModule {
+
   public static final String NAME = "DeviceAdmin";
 
   public DeviceAdminModule(ReactApplicationContext reactContext) {
@@ -22,11 +22,19 @@ public class DeviceAdminModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
-
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
-  public void multiply(double a, double b, Promise promise) {
-    promise.resolve(a * b);
+  public void disableDeviceAdmin() {
+    DeviceAdminReceiverImpl.disableDeviceAdmin(getReactApplicationContext());
+  }
+
+  @ReactMethod
+  public void isAdminActive() {
+    boolean isActive = DeviceAdminReceiverImpl.isAdminActive(
+      getReactApplicationContext()
+    );
+
+    getReactApplicationContext()
+      .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+      .emit("isAdminActive", isActive);
   }
 }

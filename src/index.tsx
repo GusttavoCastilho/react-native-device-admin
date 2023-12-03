@@ -17,6 +17,6 @@ const DeviceAdmin = NativeModules.DeviceAdmin
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return DeviceAdmin.multiply(a, b);
+export function isAdmin(): Promise<boolean> {
+  return DeviceAdmin.isAdminActive();
 }
