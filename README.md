@@ -13,8 +13,6 @@ npm install react-native-device-admin
 ```js
 import { isAdmin } from 'react-native-device-admin';
 
-// ...
-
 if(isAdmin) {
   // your logic here
 }
